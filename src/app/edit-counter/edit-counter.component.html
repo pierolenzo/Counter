@@ -1,1 +1,25 @@
+<div class="d-flex flex-column">
+  <div class="d-flex justify-content-evenly">
+    <label class="col-2" for="counterFiled">Counter: </label>
+    <input class="col-4" id="counterFiled" type="number" [formControl]="counterFiled" />
+  </div>
 
+  <p *ngIf="counterFiled.invalid || counter.value < 0" class="text-danger">
+    <small>Un valore positivo è richiesto</small>
+  </p>
+
+  <div class="d-flex justify-content-evenly">
+    <button
+      (click)="counter.increase(+counterFiled.value)"
+      [disabled]="!counterFiled.valid"
+    >
+      Increase
+    </button>
+    <button
+      (click)="counter.decrease(+counterFiled.value)"
+      [disabled]="!counterFiled.valid  || counter.value < 0"
+    >
+      Decrease
+    </button>
+  </div>
+</div>
