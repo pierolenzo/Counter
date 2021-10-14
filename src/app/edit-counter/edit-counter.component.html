@@ -1,25 +1,31 @@
 <div class="d-flex flex-column">
-  <div class="d-flex justify-content-evenly">
-    <label class="col-2" for="counterFiled">Counter: </label>
-    <input class="col-4" id="counterFiled" type="number" [formControl]="counterFiled" />
+
+  <div class="row p-3">
+    <input
+      class="form-control"
+      [ngClass]="{ 'is-invalid': counterFiled.invalid || counter.value < 0 }"
+      id="counterFiled"
+      type="number"
+      [formControl]="counterFiled"/>
+    <p *ngIf="counterFiled.invalid || counter.value < 0" class="text-danger p-0 m-0">
+      <small>Inserisci un valore positivo</small>
+    </p>
   </div>
 
-  <p *ngIf="counterFiled.invalid || counter.value < 0" class="text-danger">
-    <small>Un valore positivo è richiesto</small>
-  </p>
-
-  <div class="d-flex justify-content-evenly">
+  <div class="row p-3 d-flex justify-content-between">
     <button
+      class="col-5 btn btn-primary"
       (click)="counter.increase(+counterFiled.value)"
-      [disabled]="!counterFiled.valid"
-    >
-      Increase
+      [disabled]="!counterFiled.valid || counterFiled.value === 0 ">
+      Aggiungi
     </button>
     <button
+      class="col-5 btn btn-danger"
       (click)="counter.decrease(+counterFiled.value)"
-      [disabled]="!counterFiled.valid  || counter.value <= 0 || (counter.value - counterFiled.value) < 0"
-    >
-      Decrease
+      [disabled]="!counterFiled.valid || counter.value <= 0 ||
+        counter.value - counterFiled.value < 0 || counterFiled.value === 0 ">
+      Sottrai
     </button>
   </div>
+
 </div>
