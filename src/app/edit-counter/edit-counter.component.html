@@ -17,7 +17,7 @@
     </button>
     <button
       (click)="counter.decrease(+counterFiled.value)"
-      [disabled]="!counterFiled.valid  || counter.value < 0"
+      [disabled]="!counterFiled.valid  || counter.value <= 0 || (counter.value - counterFiled.value) < 0"
     >
       Decrease
     </button>
