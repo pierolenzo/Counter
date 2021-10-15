@@ -22,11 +22,11 @@ export class CounterService {
     this.counter$ = this.counterSubject.asObservable();
   }
 
-    public updateCounter(num: number) {
-      this.counterSubject.next(num);
-      // cache
-      localStorage.setItem(this.COUNTER_KEY, String(num));
-    }
+  public updateCounter(num: number) {
+    this.counterSubject.next(num);
+    // cache
+    localStorage.setItem(this.COUNTER_KEY, String(num));
+  }
 
 
 
