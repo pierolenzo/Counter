@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { CounterService } from '../counter.service';
 
 @Component({
@@ -9,14 +10,16 @@ import { CounterService } from '../counter.service';
 })
 export class EditCounterComponent implements OnInit {
 
-  counterFiled = new FormControl('1', Validators.min(0))
+  constructor(private counterService: CounterService) {
 
-  constructor(public counter: CounterService) { }
+  }
 
   ngOnInit(): void {
 
   }
 
-
+  incrementCounter() {
+    this.counterService.updateCounter(10);
+  }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import { CounterService } from '../counter.service';
 
 @Component({
@@ -7,10 +8,14 @@ import { CounterService } from '../counter.service';
   styleUrls: ['./show-counter.component.sass'],
 })
 export class ShowCounterComponent implements OnInit {
-  constructor(public counter: CounterService) {}
+  public counter$!: Observable<number>;
+
+  constructor(private counterService: CounterService) {}
 
   ngOnInit(): void {
-
+    this.counter$ = this.counterService.counter$;
   }
+
+
 
 }
