@@ -1,14 +1,14 @@
-<!-- <div class="d-flex flex-column">
-
+<div class="d-flex flex-column">
   <div class="row p-3">
     <input
       class="form-control"
-      [ngClass]="{ 'is-invalid': counterField.invalid || counter.value < 0 }"
+      [ngClass]="{ 'is-invalid': counterField.invalid || counter < 0 }"
       id="counterField"
       name="counterField"
       type="number"
-      [formControl]="counterField"/>
-    <p *ngIf="counterField.invalid || counter.value < 0" class="text-danger p-0 m-0">
+      [formControl]="counterField"
+    />
+    <p *ngIf="counterField.invalid || counter < 0" class="text-danger p-0 m-0">
       <small>Inserisci un valore positivo</small>
     </p>
   </div>
@@ -16,23 +16,21 @@
   <div class="row p-3 d-flex justify-content-between">
     <button
       class="col-5 btn btn-primary"
-      (click)="counter.increase(+counterField.value)"
-      [disabled]="!counterField.valid || counterField.value === 0 ">
+      (click)="incrementCounter(+counterField.value)"
+      [disabled]="!counterField.valid || counterField.value === 0"
+    >
       Aggiungi
     </button>
     <button
       class="col-5 btn btn-danger"
-      (click)="counter.decrease(+counterField.value)"
-      [disabled]="!counterField.valid || counter.value <= 0 ||
-        counter.value - counterField.value < 0 || counterField.value === 0 ">
+      (click)="decrementCounter(+counterField.value)"
+      [disabled]="
+        !counterField.valid ||
+        counter <= 0 ||
+        counter - counterField.value < 0 ||
+        counterField.value === 0"
+    >
       Sottrai
     </button>
   </div>
-
-</div> -->
-<button
-class="col-5 btn btn-primary"
-(click)="incrementCounter()"
->
-Aggiungi
-</button>
+</div>

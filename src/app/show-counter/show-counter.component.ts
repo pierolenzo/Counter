@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { CounterService } from '../counter.service';
 
 @Component({
@@ -7,15 +7,18 @@ import { CounterService } from '../counter.service';
   templateUrl: './show-counter.component.html',
   styleUrls: ['./show-counter.component.sass'],
 })
-export class ShowCounterComponent implements OnInit {
-  public counter$!: Observable<number>;
+export class ShowCounterComponent implements OnInit, OnDestroy {
+  public counter!: number;
+  subscription!: Subscription;
 
   constructor(private counterService: CounterService) {}
 
   ngOnInit(): void {
-    this.counter$ = this.counterService.counter$;
+    this.subscription = this.counterService.counter$
+    .subscribe((data) => (this.counter = data));
   }
 
-
-
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

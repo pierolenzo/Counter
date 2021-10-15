@@ -1,45 +1,35 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CounterService {
   private COUNTER_KEY: string = 'counter';
-
-  // per gestire lo stato tra i componenti
   private counterSubject!: BehaviorSubject<number>;
-  //
+
   public counter$!: Observable<number>;
 
   constructor() {
     this.counterSubject = new BehaviorSubject<number>(
       localStorage.getItem(this.COUNTER_KEY)
-      ? Number(localStorage.getItem(this.COUNTER_KEY))
-      : 1);
-
-    // per accedere in lettura
+        ? Number(localStorage.getItem(this.COUNTER_KEY))
+        : 1
+    );
     this.counter$ = this.counterSubject.asObservable();
   }
 
-  public updateCounter(num: number) {
-    this.counterSubject.next(num);
-    // cache
+  public cacheCounter(num: number): void {
     localStorage.setItem(this.COUNTER_KEY, String(num));
   }
 
+  public increase(input: number = 1): void {
+    this.counterSubject.next(this.counterSubject.value + input);
+    this.cacheCounter(this.counterSubject.value);
+  }
 
-
-  // public get value() : number {
-  //   return this.counter;
-  // }
-
-  // public increase(input: number = 1) {
-  //   this.counter.next(input);
-  // }
-
-  // public decrease(input: number = 1) : number {
-  //   return this.counter -= input;
-  // }
-
+  public decrease(input: number = 1): void {
+    this.counterSubject.next(this.counterSubject.value - input);
+    this.cacheCounter(this.counterSubject.value);
+  }
 }
