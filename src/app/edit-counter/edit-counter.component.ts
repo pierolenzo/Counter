@@ -9,7 +9,7 @@ import { CounterService } from '../counter.service';
 })
 export class EditCounterComponent implements OnInit {
 
-  counterFiled = new FormControl('1', Validators.min(0))
+  counterField = new FormControl('1', Validators.min(0))
 
   constructor(public counter: CounterService) { }
 
