@@ -5,6 +5,7 @@
       class="form-control"
       [ngClass]="{ 'is-invalid': counterField.invalid || counter.value < 0 }"
       id="counterField"
+      name="counterField"
       type="number"
       [formControl]="counterField"/>
     <p *ngIf="counterField.invalid || counter.value < 0" class="text-danger p-0 m-0">
