@@ -30,7 +30,7 @@ export class EditCounterComponent implements OnInit {
     .subscribe((data) => (this.counter = data));
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 }

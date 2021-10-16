@@ -8,7 +8,9 @@
       type="number"
       [formControl]="counterField"
     />
-    <p *ngIf="counterField.invalid || counter < 0" class="text-danger p-0 m-0">
+    <p class="text-danger p-0 m-0"
+        *ngIf="counterField.invalid || counter < 0"
+    >
       <small>Inserisci un valore positivo</small>
     </p>
   </div>

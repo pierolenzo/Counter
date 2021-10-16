@@ -18,7 +18,7 @@ export class ShowCounterComponent implements OnInit, OnDestroy {
     .subscribe((data) => (this.counter = data));
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 }
